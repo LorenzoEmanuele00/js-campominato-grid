@@ -80,7 +80,7 @@ document.querySelector("button").addEventListener("click", function() {
     document.querySelector(".grid").innerHTML = "";
     switch(difficulty) {
         case "hard":
-            bombs = generatesBomb(16);
+            bombs = generatesBomb(49);
             console.log(bombs);
 
             for (let i = 1; i <= 49; i++) {
