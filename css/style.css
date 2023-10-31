@@ -35,7 +35,7 @@ nav {
     align-items: center;
     justify-content: space-around;
     height: 10vh;
-    width: 30%;
+    width: 400px;
 }
 
 nav button {
@@ -61,6 +61,26 @@ nav select {
     height: 85vh;
     display: flex;
     align-items: center;
+    justify-content: center;
+    background-color: rgb(166, 235, 144);
+    color: rgb(0, 0, 0);
+}
+
+.hidden {
+    display: none;
+}
+
+.size {
+    font-size: 2rem;
+    padding-left: 20px;
+}
+
+.lose {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     background-color: rgb(166, 235, 144);
     color: rgb(0, 0, 0);
 }
@@ -69,7 +89,6 @@ nav select {
     display: flex;
     flex-wrap: wrap;
     width: 40%;
-    margin: 0 auto;
 }
 
 .easy,

@@ -34,7 +34,7 @@ function clickHandle() {
     
     if (bombs.includes(parseInt(this.innerHTML)) && !verifyBomb){
         this.classList.add("red");
-        console.log("sconfitta");
+        loss();
         verifyBomb = true;
     }
 
@@ -67,17 +67,50 @@ function createCell (n, cl) {
     return newCell;
 }
 
+/**
+ * EVENTS AFTER LOST
+ */
+function loss () {
+    const cells = document.querySelectorAll(`.${difficulty}`)
+    for (let i = 0; i < cells.length; i++) {
+        if (bombs.includes(parseInt(cells[i].innerHTML))){
+            cells[i].classList.add("red");
+        }
+    }
+    let newPhrase = document.querySelector(`.win-lose-phrase`);
+    newPhrase.classList.remove("hidden");
+    newPhrase.innerHTML = document.createElement("h2").innerHTML = `HAI PERSO - GIOCA ANCORA`;
+    newPhrase.classList.add("size");
+    document.querySelector(`.game-area`).classList.remove(`.game`);
+    document.querySelector(`.game-area`).classList.add(`.lose`);
+}
+
 
 // ***** MAIN CODE *****
 let bombs;
-let verifyBomb = false;
+let verifyBomb;
 let clicked = [];
-let cells;
+let difficulty = "";
+let newPhrase = document.querySelector(`.win-lose-phrase`);
 
 document.querySelector("button").addEventListener("click", function() {
-    const difficulty = document.getElementById("diff").value;
+
+    // BOMB RESET
+    verifyBomb = false;
+
+    // LOOS RESET
+    newPhrase.classList.add("hidden");
+    document.querySelector(`.game-area`).classList.remove(`.lose`);
+    document.querySelector(`.game-area`).classList.add(`.game`);
+
+    // CLICKED CELL RESET
     clicked = [];
+
+    // GRID RESET
     document.querySelector(".grid").innerHTML = "";
+
+    // DIFFICULTY CHECK
+    difficulty = document.getElementById("diff").value;
     switch(difficulty) {
         case "hard":
             bombs = generatesBomb(49);
@@ -87,7 +120,6 @@ document.querySelector("button").addEventListener("click", function() {
                 const cell = createCell(i, difficulty);
                 cell.addEventListener("click", clickHandle);
                 document.querySelector(".grid").append(cell);
-                cells++;
             }
             break;
         case "mid":
@@ -98,7 +130,6 @@ document.querySelector("button").addEventListener("click", function() {
                 const cell = createCell(i, difficulty);
                 cell.addEventListener("click", clickHandle) 
                 document.querySelector(".grid").append(cell);
-                cells++;
             }
             break;
         default:
@@ -108,7 +139,6 @@ document.querySelector("button").addEventListener("click", function() {
                 const cell = createCell(i, difficulty);
                 cell.addEventListener("click", clickHandle);
                 document.querySelector(".grid").append(cell);
-                cells++;
             }
             break;
     } 
